@@ -77,6 +77,30 @@ func ReadRouteShape(db *sql.DB, route string) []RouteShape {
 	return res
 }
 
+func ReadCalendars(db *sql.DB) []Calendar {
+	sql_query := `
+	SELECT Code, Date FROM Calendars
+	`
+	var res []Calendar
+
+	items := ReadData(db, sql_query, func(rows *sql.Rows) interface{} {
+		item := Calendar{}
+		err2 := rows.Scan(&item.Code, &item.Date)
+
+		if err2 != nil {
+			panic(err2)
+		}
+
+		return item
+	})
+
+	for _, item := range items {
+		res = append(res, item.(Calendar))
+	}
+
+	return res
+}
+
 func ReadRoute(db *sql.DB) []Route {
 	sql_query := `
 	SELECT Id, Code, Shape, Name, Stops FROM Routes

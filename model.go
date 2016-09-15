@@ -1,5 +1,10 @@
 package main
 
+type Calendar struct {
+	Code string `json:"code"`
+	Date string `json:"date"`
+}
+
 type Schedule struct {
 	Stop    string `json:"stop"`
 	Route   string `json:"route"`

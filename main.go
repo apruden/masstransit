@@ -42,6 +42,11 @@ func main() {
 		c.JSON(200, routes)
 	})
 
+	r.GET("/calendars", func(c *gin.Context) {
+		routes := ReadCalendars(db)
+		c.JSON(200, routes)
+	})
+
 	r.GET("/stops/:stop/schedules", func(c *gin.Context) {
 		//stop, _ := strconv.Atoi(c.Param("stop"))
 		stop := c.Param("stop")
